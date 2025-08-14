@@ -55,7 +55,18 @@ public class PortfolioService : IPortfolioService
 
         return await Task.FromResult(portfolio);
     }
-       public User GetTestUser()
+    public async Task<Portfolio?> GetPortfolioAsync(Guid userId)
+    {
+        var portfolio = _portfolios.FirstOrDefault(p => p.User.Id == userId);
+        return await Task.FromResult(portfolio);
+    }
+
+    public async Task<List<Stock>> GetAvailableStocksAsync()
+    {
+        return await Task.FromResult(_stocks);
+    }
+
+    public User GetTestUser()
     {
         return _users.First();
     }
